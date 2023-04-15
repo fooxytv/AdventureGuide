@@ -153,11 +153,12 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
                         local boss = dungeon.bosses[value]
                         -- Release children of previous boss container if exists
                         if container.contentGroup then
-                            container.contentGroup:Release()
+                            AceGUI:Release(container.contentGroup)
+                            -- container.contentGroup:Release()
                             container.contentGroup = nil
                         end
 
-                        C_Timer.After(0, function ()
+                        C_Timer.After(0.5, function ()
                             -- Create an InlineGroup for Suggested Content
                             container.contentGroup = AceGUI:Create("InlineGroup")
                             container.contentGroup:SetLayout("Flow")
