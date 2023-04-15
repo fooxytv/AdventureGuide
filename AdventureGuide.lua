@@ -158,7 +158,7 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
                             container.contentGroup = nil
                         end
 
-                        C_Timer.After(0.5, function ()
+                        C_Timer.After(0.1, function ()
                             -- Create an InlineGroup for Suggested Content
                             container.contentGroup = AceGUI:Create("InlineGroup")
                             container.contentGroup:SetLayout("Flow")
