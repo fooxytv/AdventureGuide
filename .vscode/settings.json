@@ -1,0 +1,30 @@
+{
+    "Lua.diagnostics.globals": [
+        "DEFAULT_CHAT_FRAME",
+        "SELECTED_CHAT_FRAME",
+        "InterfaceOptions_AddCategory",
+        "NORMAL_FONT_COLOR",
+        "GameFontNormal",
+        "GameFontHighlight",
+        "ACCEPT",
+        "CANCEL",
+        "GameFontHighlightLarge",
+        "GameFontHighlightSmall",
+        "SlashCmdList",
+        "hash_SlashCmdList",
+        "CLOSE",
+        "PanelTemplates_TabResize",
+        "PanelTemplates_SetDisabledTabState",
+        "PanelTemplates_SelectTab",
+        "PanelTemplates_DeselectTab",
+        "FONT_COLOR_CODE_CLOSE",
+        "SetDesaturation",
+        "ColorPickerFrame",
+        "OpacitySliderFrame",
+        "ChatFontNormal",
+        "OKAY",
+        "NOT_BOUND",
+        "GetCursorPosition",
+        "Add"
+    ]
+}
