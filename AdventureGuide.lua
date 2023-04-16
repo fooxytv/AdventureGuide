@@ -180,7 +180,7 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
 
                         -- Set new points for the widgets
                         -- container.contentGroup.frame:ClearAllPoints()
-                        -- container.contentGroup.frame:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 10, -230)
+                        container.contentGroup.frame:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 10, -230)
                     end
                 end)
 
