@@ -153,38 +153,34 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
                         local boss = dungeon.bosses[value]
                         -- Release children of previous boss container if exists
                         if container.contentGroup then
-                            AceGUI:Release(container.contentGroup)
-                            -- container.contentGroup:Release()
-                            container.contentGroup = nil
+                            container.contentGroup:ReleaseChildren()
                         end
+                        -- Create an InlineGroup for Suggested Content
+                        container.contentGroup = AceGUI:Create("InlineGroup")
+                        container.contentGroup:SetLayout("Flow")
+                        container.contentGroup:SetFullWidth(true)
+                        container.contentGroup:SetFullHeight(true)
+                        container:AddChild(container.contentGroup)
 
-                        C_Timer.After(0.1, function ()
-                            -- Create an InlineGroup for Suggested Content
-                            container.contentGroup = AceGUI:Create("InlineGroup")
-                            container.contentGroup:SetLayout("Flow")
-                            container.contentGroup:SetFullWidth(true)
-                            container.contentGroup:SetFullHeight(true)
-                            container:AddChild(container.contentGroup)
+                        -- Create a label for the suggested content description
+                        local descriptionLabel = AceGUI:Create("Label")
+                        descriptionLabel:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
+                        descriptionLabel:SetText(dungeon.bossInfo[value])
+                        descriptionLabel:SetRelativeWidth(1)
+                        container.contentGroup:AddChild(descriptionLabel)
 
-                            -- Create a label for the suggested content description
-                            local descriptionLabel = AceGUI:Create("Label")
-                            descriptionLabel:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
-                            descriptionLabel:SetText(dungeon.bossInfo[value])
-                            descriptionLabel:SetRelativeWidth(1)
-                            container.contentGroup:AddChild(descriptionLabel)
+                        -- Add padding to the description label
+                        local paddingFrame = AceGUI:Create("Label")
+                        paddingFrame:SetWidth(1)
+                        paddingFrame:SetText("PaddingFrame")
+                        paddingFrame:SetFullHeight(true)
+                        paddingFrame:SetUserData("marginLeft", 0)
+                        paddingFrame:SetUserData("marginTop", -10)
+                        container.contentGroup:AddChild(paddingFrame)
 
-                            -- Add padding to the description label
-                            local paddingFrame = AceGUI:Create("Label")
-                            paddingFrame:SetWidth(1)
-                            paddingFrame:SetFullHeight(true)
-                            paddingFrame:SetUserData("marginLeft", 0)
-                            paddingFrame:SetUserData("marginTop", -10)
-                            container.contentGroup:AddChild(paddingFrame)
-
-                            -- Set new points for the widgets
-                            container.contentGroup.frame:ClearAllPoints()
-                            container.contentGroup.frame:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 10, -230)
-                        end)
+                        -- Set new points for the widgets
+                        -- container.contentGroup.frame:ClearAllPoints()
+                        -- container.contentGroup.frame:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 10, -230)
                     end
                 end)
 
