@@ -25,6 +25,8 @@
         "OKAY",
         "NOT_BOUND",
         "GetCursorPosition",
-        "Add"
+        "Add",
+        "GameFontNormalSmall",
+        "GameTooltip"
     ]
 }

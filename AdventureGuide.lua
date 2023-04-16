@@ -100,93 +100,34 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
         label:SetFullHeight(true)
         container:AddChild(label)
 
-        -- Create a container for dungeon and boss dropdowns
-        local dropdownsContainer = AceGUI:Create("SimpleGroup")
-        dropdownsContainer:SetLayout("List")
-        dropdownsContainer:SetFullWidth(true)
-        container:AddChild(dropdownsContainer)
+        local contentGroup = AceGUI:Create("InlineGroup")
+        contentGroup:SetLayout("Flow")
+        contentGroup:SetFullWidth(true)
+        contentGroup:SetFullHeight(true)
+        container:AddChild(contentGroup)
 
-        -- Create an AceGUI dropdown for dungeons
-        local dungeonsDropdown = AceGUI:Create("Dropdown")
-        dungeonsDropdown:SetList({
-            ["bfd"] = dungeons[1].name
-        })
-        dungeonsDropdown:SetRelativeWidth(0.2)
-        dungeonsDropdown:SetText("Select Dungeon:")
-        dropdownsContainer:AddChild(dungeonsDropdown)
-        dungeonsDropdown:SetCallback("OnValueChanged", function (widget, event, value)
-            local dungeon
-            if value == "bfd" then
-                dungeon = dungeons[1]
-                -- Create an InlineGroup for Suggested Content
-                local contentGroup = AceGUI:Create("InlineGroup")
-                contentGroup:SetLayout("Flow")
-                contentGroup:SetFullWidth(true)
-                contentGroup:SetFullHeight(true)
-                container:AddChild(contentGroup)
+        local bfdTexture = AceGUI:Create("Icon")
+        bfdTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Media\\bfd.blp")
+        bfdTexture:SetImageSize(140, 100)
+        bfdTexture:SetText("Blackfathom Deeps")
+        bfdTexture:SetRelativeWidth(1)
+        bfdTexture:SetPoint("LEFT", container.frame, "LEFT", 0, -0)
+        contentGroup:AddChild(bfdTexture)
 
-                -- Create a label for the suggested content description
-                local descriptionLabel = AceGUI:Create("Label")
-                descriptionLabel:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
-                descriptionLabel:SetText(dungeon.overview)
-                descriptionLabel:SetRelativeWidth(1)
-                contentGroup:AddChild(descriptionLabel)
+        local bfdTexture = AceGUI:Create("Icon")
+        bfdTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Media\\brf.blp")
+        bfdTexture:SetImageSize(140, 100)
+        bfdTexture:SetText("Blackrock Depths")
+        bfdTexture:SetRelativeWidth(1)
+        bfdTexture:SetPoint("LEFT", container.frame, "LEFT", 0, -0)
+        contentGroup:AddChild(bfdTexture)
 
-                -- Add padding to the description label
-                local paddingFrame = AceGUI:Create("Label")
-                paddingFrame:SetWidth(1)
-                paddingFrame:SetFullHeight(true)
-                paddingFrame:SetUserData("marginLeft", 0)
-                paddingFrame:SetUserData("marginTop", -10)
-                contentGroup:AddChild(paddingFrame)
-            elseif value == "dungeon2" then
-                dungeon = dungeon[2]
-            end
-
-            if dungeon then
-                local bossesDropdown = AceGUI:Create("Dropdown")
-                bossesDropdown:SetList(dungeon.bosses)
-                bossesDropdown:SetRelativeWidth(0.2)
-                bossesDropdown:SetText("Select Boss:")
-                bossesDropdown:SetCallback("OnValueChanged", function (_, _, value)
-                    if value then
-                        local boss = dungeon.bosses[value]
-                        -- Release children of previous boss container if exists
-                        if container.contentGroup then
-                            container.contentGroup:ReleaseChildren()
-                        end
-                        -- Create an InlineGroup for Suggested Content
-                        container.contentGroup = AceGUI:Create("InlineGroup")
-                        container.contentGroup:SetLayout("Flow")
-                        container.contentGroup:SetFullWidth(true)
-                        container.contentGroup:SetFullHeight(true)
-                        container:AddChild(container.contentGroup)
-
-                        -- Create a label for the suggested content description
-                        local descriptionLabel = AceGUI:Create("Label")
-                        descriptionLabel:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
-                        descriptionLabel:SetText(dungeon.bossInfo[value])
-                        descriptionLabel:SetRelativeWidth(1)
-                        container.contentGroup:AddChild(descriptionLabel)
-
-                        -- Add padding to the description label
-                        local paddingFrame = AceGUI:Create("Label")
-                        paddingFrame:SetWidth(1)
-                        paddingFrame:SetText("PaddingFrame")
-                        paddingFrame:SetFullHeight(true)
-                        paddingFrame:SetUserData("marginLeft", 0)
-                        paddingFrame:SetUserData("marginTop", -10)
-                        container.contentGroup:AddChild(paddingFrame)
-
-                        -- Set new points for the widgets
-                        -- container.contentGroup.frame:ClearAllPoints()
-                        container.contentGroup.frame:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 10, -230)
-                    end
-                end)
-
-                dropdownsContainer:AddChild(bossesDropdown)
-            end
-        end)
+        local paddingFrame = AceGUI:Create("Label")
+        paddingFrame:SetWidth(1)
+        paddingFrame:SetFullHeight(true)
+        paddingFrame:SetUserData("marginLeft", 0)
+        paddingFrame:SetUserData("marginTop", 0)
+        contentGroup:AddChild(paddingFrame)
     elseif group == "tab3" then
         -- Update content for Tab 3
         container:ReleaseChildren() -- Clear existing content
