@@ -4,27 +4,8 @@ local AceGUI = LibStub("AceGUI-3.0")
 -- Addon variables
 local playerName = UnitName("player")
 
--- Create a table to store dungeon and raid information
-local dungeons = {
-    {
-        name = "Blackfathom Deeps",
-        overview = "Once dedicated to the night elves' goddess Elune, Blackfathom Deeps was thought to have been destroyed during the Sundering, lost beneath the ocean. Millennia later, members of the Twilight's Hammer cult were drawn to the temple by whispers and foul dreams. After sacrificing untold numbers of innocents, the cult was rewarded with a new task: to protect one of the Old Gods' most cherished creatures, a pet that is still in need of nurturing before he can unleash his dark powers on the world.\n\nThis dungeon is recommended between (24 - 32)",
-        bosses = {"Ghamoo-Ra",
-                  "Lady Sarevess",
-                  "Gelihast",
-                  "Baron Aquanis",
-                  "Twilight Lord Kelris",
-                  "Old Serra'kis",
-                  "Aku'mai"},
-        bossInfo = {"Ghamoo-Ra\n\nWhen the Twilight's Hammer cult arrived, its followers roused and imprisoned one of the last peaceful creatures living in Elune's temple. The cult delighted in tormenting the giant turtle for years, flaying its mind and body until it succumbed to madness. Naming the beast Ghamoo-Ra, the cultists attempt to control its savagery in order to protect their lair.",
-                    "Lady Sarevess\n\nNext boss information"},
-    },
-    {
-        name = "Blackrock Depths",
-        overview = "Text to go here",
-        bosses = {"Boss 1"}
-    }
-}
+local addonName = "AdventureGuide"
+
 -- Create the main addon frame
 local addonFrame = AceGUI:Create("Frame")
 addonFrame:SetTitle("Adventure Guide")
@@ -106,21 +87,164 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
         contentGroup:SetFullHeight(true)
         container:AddChild(contentGroup)
 
-        local bfdTexture = AceGUI:Create("Icon")
-        bfdTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Media\\bfd.blp")
-        bfdTexture:SetImageSize(140, 100)
-        bfdTexture:SetText("Blackfathom Deeps")
-        bfdTexture:SetRelativeWidth(1)
-        bfdTexture:SetPoint("LEFT", container.frame, "LEFT", 0, -0)
-        contentGroup:AddChild(bfdTexture)
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\bfd.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+        dungeonTexture:SetCallback("OnClick", function()
+            container:ReleaseChildren()
 
-        local bfdTexture = AceGUI:Create("Icon")
-        bfdTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Media\\brf.blp")
-        bfdTexture:SetImageSize(140, 100)
-        bfdTexture:SetText("Blackrock Depths")
-        bfdTexture:SetRelativeWidth(1)
-        bfdTexture:SetPoint("LEFT", container.frame, "LEFT", 0, -0)
-        contentGroup:AddChild(bfdTexture)
+            container:ReleaseChildren() -- Clear existing content
+            local label = AceGUI:Create("Label")
+            label:SetFont("Fonts\\FRIZQT__.TTF", 25, nil)
+            label:SetColor(1, 1, 0)
+            label:SetText("\n Dungeons")
+            label:SetFullWidth(true)
+            label:SetFullHeight(true)
+            container:AddChild(label)
+    
+            local contentGroup = AceGUI:Create("InlineGroup")
+            contentGroup:SetLayout("Flow")
+            contentGroup:SetFullWidth(true)
+            contentGroup:SetFullHeight(true)
+            container:AddChild(contentGroup)
+
+        end)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\brd.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\dm.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\drm.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\gnome.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\lbrs.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\mara.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\rfc.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\rfd.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\rfk.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\sh.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\sm.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\scholo.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\sfk.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\strat.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\stocks.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\temple.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\uld.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\wc.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
+
+        local dungeonTexture = AceGUI:Create("Icon")
+        dungeonTexture:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\zf.blp")
+        dungeonTexture:SetImageSize(172, 94)
+        dungeonTexture:SetRelativeWidth(0.2)
+        dungeonTexture:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, -10)
+        contentGroup:AddChild(dungeonTexture)
 
         local paddingFrame = AceGUI:Create("Label")
         paddingFrame:SetWidth(1)
@@ -149,3 +273,18 @@ addonFrame:AddChild(tab)
 
 -- Show the main addon frame
 addonFrame:Show()
+
+-- -- Minimap button
+-- local miniMapButton = CreateFrame("Button", addonName .. "miniMapButton", Minimap)
+-- miniMapButton:SetSize(32, 32)
+-- miniMapButton:SetFrameStrata("MEDIUM")
+-- miniMapButton:SetFrameLevel(0)
+-- miniMapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 54 - (80 * cos(225)), (80 * sin(225)) - 54)
+-- miniMapButton:SetNormalTexture("Interface/PLAYERFRAME/UI-PlayerFrame-Deathknight-SingleRune")
+-- miniMapButton:SetScript("OnClick", function ()
+--     if addonFrame:IsShown() then
+--         addonFrame:Hide()
+--     else
+--         addonFrame:Show()
+--     end
+-- end)
