@@ -3,7 +3,6 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 -- Addon variables
 local playerName = UnitName("player")
-
 local addonName = "AdventureGuide"
 
 -- Create the main addon frame
