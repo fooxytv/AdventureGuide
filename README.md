@@ -8,4 +8,4 @@ Attempting to create an Adventure Guide for Classic Era
 
 # Screenshots
 
-![Suggested Content](Media/Screenshots/scs1.jpg)
+![Suggested Content](Media/Screenshots/scs1.JPG)
