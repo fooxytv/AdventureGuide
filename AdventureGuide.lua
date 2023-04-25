@@ -2,8 +2,14 @@
 local AceGUI = LibStub("AceGUI-3.0")
 
 -- Addon variables
-local playerName = UnitName("player")
 local addonName = "AdventureGuide"
+
+local playerName = UnitName("player")
+local _, playerClass = UnitClass("player")
+local classColor = RAID_CLASS_COLORS[playerClass] or {r = 1, g = 1, b = 1} -- default to white if not found
+playerName = format("|cff%02x%02x%02x%s|r", classColor.r*255, classColor.g*255, classColor.b*255, playerName)
+
+
 
 -- Create the main addon frame
 local addonFrame = AceGUI:Create("Frame")
@@ -42,6 +48,26 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
         contentGroup:SetFullWidth(true)
         contentGroup:SetFullHeight(true)
         container:AddChild(contentGroup)
+
+        local content = contentGroup.content:GetParent()
+        content:SetBackdrop({
+            bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+            edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+            title = true, tileSize = 16, edgeSize = 12,
+            insets = { left = 3, right = 3, top = 3, bottom = 3 }
+        })
+        content:SetBackdropColor(0, 0, 0, 0.8)
+        content:SetBackdropBorderColor(0, 0, 0, 1)
+
+        local content = addonFrame.content:GetParent()
+        content:SetBackdrop({
+            bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+            edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+            title = true, tileSize = 16, edgeSize = 12,
+            insets = { left = 3, right = 3, top = 3, bottom = 3 }
+        })
+        content:SetBackdropColor(0, 0, 0, 0.8)
+        content:SetBackdropBorderColor(0, 0, 0, 1)
 
         -- Create a label for the suggested content description
         local descriptionLabel = AceGUI:Create("Label")
@@ -118,6 +144,16 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
             leftBox.frame:SetPoint("BOTTOMLEFT", outerGroup.frame, "BOTTOMLEFT", 0, 0)
             outerGroup:AddChild(leftBox)
 
+            local content = leftBox.content:GetParent()
+            content:SetBackdrop({
+                bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+                edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+                title = true, tileSize = 16, edgeSize = 12,
+                insets = { left = 3, right = 3, top = 3, bottom = 3 }
+            })
+            content:SetBackdropColor(0, 0, 0, 0.8)
+            content:SetBackdropBorderColor(0, 0, 0, 1)
+
             local grButton = AceGUI:Create("Button")
             grButton:SetText("Ghamoo-Ra")
             grButton:SetPoint("TOPLEFT", container.frame, "TOPLEFT", 0, 0)
@@ -155,6 +191,16 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
             outerGroup:AddChild(rightBox)
             rightBox.frame:SetPoint("TOPRIGHT", outerGroup.frame, "TOPRIGHT", 0, 0)
             rightBox.frame:SetPoint("BOTTOMRIGHT", outerGroup.frame, "BOTTOMRIGHT", 0, 0)
+
+            local content = rightBox.content:GetParent()
+            content:SetBackdrop({
+                bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+                edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+                title = true, tileSize = 16, edgeSize = 12,
+                insets = { left = 3, right = 3, top = 3, bottom = 3 }
+            })
+            content:SetBackdropColor(0, 0, 0, 0.8)
+            content:SetBackdropBorderColor(0, 0, 0, 1)
 
             local bfdMap = AceGUI:Create("Icon")
             bfdMap:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\bfd-map.blp")
@@ -220,6 +266,60 @@ tab:SetCallback("OnGroupSelected", function(container, event, group)
                 local label = AceGUI:Create("Label")
                 label:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
                 label:SetText("\nGelihast is a level 26 Murlock located in a cave in BFD. He is an optional boss.\n\nGelihast is a straight forward encounter with a small twist - his room is packed with Murlocs. While the fight with Geli requires no explaination, you must be very careful when pulling the adds around the room prior to pulling the boss. Gelihast has a nasty net ability which can leave your tank in an awkward position to subsequently pull additional mobs, so it is crucial that you clear his room first before you pull him. Once he's dead, click on the latar behind him for a small buff.")
+                label:SetFullWidth(true)
+                label:SetFullHeight(true)
+                rightBox:AddChild(label)
+            end)
+
+            tlkButton:SetCallback("OnClick", function ()
+                rightBox:ReleaseChildren()
+
+                local bfdMap = AceGUI:Create("Icon")
+                bfdMap:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\bfd-4.blp")
+                bfdMap:SetImageSize(256, 128)
+                bfdMap:SetRelativeWidth(1)
+                bfdMap:SetPoint("CENTER", container.frame, "CENTER", 0, -10)
+                rightBox:AddChild(bfdMap)
+
+                local label = AceGUI:Create("Label")
+                label:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
+                label:SetText("\nTwilight Lord Kelris is a level 27 Elite Orc located in the pen-ultimate room of BFD.\n\nKelris is not a paricular dangerous boss, although his sleep ability may catch your healer off guard. Make sure to keep the tank topped off in the event the healer is slept, and have all hybrid classes heal the tank if such an event happens.\n\nEvent - Fire of Aku'Mai\n\nThe Fire of Aku'Mai event is a small event after lord Kelris that is required to open the door to the final boss of BFD, Aku'Mai. At the base of the Azshara statue where Kelris channels his magic, there are four braziers positioned in each corner of the statue's pedestal. Once Kelris is dead and the room is clear, have your tank click on ONE brazier, activating a single wave of the event. Each wave spawns a series of mobs that need to be killed. The first wave, the turtle wave, is the most difficult. The turtles do a remendous amount of damage and require an offtank to pick one of them up, otherwise your tank will die. Pet classes and rogue evasion tanks are very useful here. After a wave is complete, make sure to top off your group in health and mana before clicking the next brazier. All 4 braziers and subsequently all 4 waves must be conquered before the door to Aku'Mai's lair opens.")
+                label:SetFullWidth(true)
+                label:SetFullHeight(true)
+                rightBox:AddChild(label)
+            end)
+
+            oskButton:SetCallback("OnClick", function ()
+                rightBox:ReleaseChildren()
+
+                local bfdMap = AceGUI:Create("Icon")
+                bfdMap:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\bfd-5.blp")
+                bfdMap:SetImageSize(256, 128)
+                bfdMap:SetRelativeWidth(1)
+                bfdMap:SetPoint("CENTER", container.frame, "CENTER", 0, -10)
+                rightBox:AddChild(bfdMap)
+
+                local label = AceGUI:Create("Label")
+                label:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
+                label:SetText("\nOld Serra'kis is a level 26 Elite Loch Ness monster located near the end of BFD.\n\nSerra'kis is an optional loot pinata with no real abilites. The only thing you should be mindful of is your breath meter while under water.")
+                label:SetFullWidth(true)
+                label:SetFullHeight(true)
+                rightBox:AddChild(label)
+            end)
+
+            akButton:SetCallback("OnClick", function ()
+                rightBox:ReleaseChildren()
+
+                local bfdMap = AceGUI:Create("Icon")
+                bfdMap:SetImage("Interface\\AddOns\\AdventureGuide\\Textures\\bfd-6.blp")
+                bfdMap:SetImageSize(256, 128)
+                bfdMap:SetRelativeWidth(1)
+                bfdMap:SetPoint("CENTER", container.frame, "CENTER", 0, -10)
+                rightBox:AddChild(bfdMap)
+
+                local label = AceGUI:Create("Label")
+                label:SetFont("Fonts\\FRIZQT__.TTF", 12, nil)
+                label:SetText("\nAku'Mai is the level 28 Elite hydra located at the end of BFD.\n\nAku'Mai is a tank and spank with massive single target damage due to his frenzy ability. Make sure to stay away from his poison cloud so the healer can focus heals on the tank. Hybrid classes should offer healing assistance here if possible, and the tank should use a health pot if he has one. Overall, this is a very simple fight.")
                 label:SetFullWidth(true)
                 label:SetFullHeight(true)
                 rightBox:AddChild(label)
@@ -404,17 +504,15 @@ addonFrame:AddChild(tab)
 -- Show the main addon frame
 addonFrame:Show()
 
--- -- Minimap button
--- local miniMapButton = CreateFrame("Button", addonName .. "miniMapButton", Minimap)
--- miniMapButton:SetSize(32, 32)
--- miniMapButton:SetFrameStrata("MEDIUM")
--- miniMapButton:SetFrameLevel(0)
--- miniMapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 54 - (80 * cos(225)), (80 * sin(225)) - 54)
--- miniMapButton:SetNormalTexture("Interface/PLAYERFRAME/UI-PlayerFrame-Deathknight-SingleRune")
--- miniMapButton:SetScript("OnClick", function ()
---     if addonFrame:IsShown() then
---         addonFrame:Hide()
---     else
---         addonFrame:Show()
---     end
--- end)
+-- Minimap button
+local miniMapButton = CreateFrame("Button", addonName .. "miniMapButton", Minimap)
+miniMapButton:SetSize(32, 32)
+miniMapButton:SetFrameStrata("MEDIUM")
+miniMapButton:SetFrameLevel(0)
+miniMapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 54 - (80 * cos(225)), (80 * sin(225)) - 54)
+miniMapButton:SetNormalTexture("Interface/PLAYERFRAME/UI-PlayerFrame-Deathknight-SingleRune")
+miniMapButton:SetScript("OnClick", function ()
+    if addonFrame:IsShown() then
+        addonFrame:Hide()
+    end
+end)

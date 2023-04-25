@@ -27,6 +27,8 @@
         "GetCursorPosition",
         "Add",
         "GameFontNormalSmall",
-        "GameTooltip"
+        "GameTooltip",
+        "CLASS",
+        "RAID"
     ]
 }
