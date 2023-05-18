@@ -1,5 +1,6 @@
 {
     "Lua.diagnostics.globals": [
+        "SlashCmdList",
         "DEFAULT_CHAT_FRAME",
         "SELECTED_CHAT_FRAME",
         "InterfaceOptions_AddCategory",
@@ -10,7 +11,6 @@
         "CANCEL",
         "GameFontHighlightLarge",
         "GameFontHighlightSmall",
-        "SlashCmdList",
         "hash_SlashCmdList",
         "CLOSE",
         "PanelTemplates_TabResize",
@@ -24,11 +24,6 @@
         "ChatFontNormal",
         "OKAY",
         "NOT_BOUND",
-        "GetCursorPosition",
-        "Add",
-        "GameFontNormalSmall",
-        "GameTooltip",
-        "CLASS",
-        "RAID"
+        "GetCursorPosition"
     ]
 }
