@@ -15,5 +15,6 @@ It can also be beneficial for players with multi life characters, as they can fa
 
 ![Suggested Content](Media/Screenshots/ss_sc1.JPG)
 ![Dungeons](Media/Screenshots/ss_d1.JPG)
+![Dungeons](Media/Screenshots/ss_d2.JPG)
 <!-- ![DungeonBfd](Media/Screenshots/scs3.JPG)
 ![BfdBoss](Media/Screenshots/scs4.JPG) -->
